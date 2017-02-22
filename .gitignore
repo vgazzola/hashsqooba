@@ -25,3 +25,5 @@ log/
 .project
 .settings/
 
+# Python virtualenv
+python/hashcode_venv

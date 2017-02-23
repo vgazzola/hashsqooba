@@ -7,6 +7,7 @@ import io.sqooba.hashcode.work.model.Video;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -28,6 +29,7 @@ public class Main {
 //            System.out.println(n);
             System.out.println(n.inFile.toString());
             String[] videoIds = new String[n.numberOfcacheServers];
+            int[] alreadySelected = new int[n.numberOfVideo];
             for (int i = 0; i < n.numberOfcacheServers; i++) {
                 videoIds[i] = "";
                 List<Integer> currentSelectedVids = new ArrayList<Integer>();
@@ -35,11 +37,16 @@ public class Main {
                 int size = 0;
 
                 for (int j = 0; j < currentCache.size(); j++) {
+
                     Endpoint currentEndpoint = currentCache.get(j);
 
                     List<Video> currentList = n.endpointVids[currentEndpoint.id];
-//                    for (int k = 0; k < currentList.size(); k++) {
-//                        List<Video> currentList = n.endpointVids[k];
+                    for (Video vid: currentList) {
+                        vid.latency = currentEndpoint.latency;
+
+                    }
+                    Collections.sort(currentList);
+
                         for (int l = 0; l < currentList.size(); l++) {
                             Video currentVid = currentList.get(l);
 
@@ -48,15 +55,16 @@ public class Main {
 
                             size += currentVid.size;
 
-                           if(currentSelectedVids.contains(currentVid.id))
+                           if(currentSelectedVids.contains(currentVid.id) || alreadySelected[currentVid.id] >3)
                                continue;
 
                             videoIds[i] += currentVid.id + separator;
+                            alreadySelected[currentVid.id]++;
                             currentSelectedVids.add(currentVid.id);
                         }
 
 
-//                    }
+
 
                 }
 

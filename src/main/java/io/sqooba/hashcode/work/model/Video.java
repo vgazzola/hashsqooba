@@ -6,6 +6,7 @@ package io.sqooba.hashcode.work.model;
 public class Video implements Comparable<Video>{
     public int size;
     public int id;
+    public int requests;
 
     public Video(int size, int id) {
         this.size = size;
@@ -13,7 +14,16 @@ public class Video implements Comparable<Video>{
     }
 
     public int compareTo(Video o) {
-        return size == o.size ? 0: size > o.size ?-1 :1; //invert (-1, 1) if needed
+        return getValue() == o.getValue() ? 0: getValue() > o.getValue() ?1 :-1; //invert (-1, 1) if needed
+    }
+
+
+    //the smaller, the better...
+//    private double getValue(){
+//        return (double)size;
+//    }
+    private double getValue(){
+        return (double)size / requests;
     }
 
     @Override
@@ -21,6 +31,7 @@ public class Video implements Comparable<Video>{
         return "Video{" +
                 "size=" + size +
                 ", id=" + id +
-                '}';
+                ", requests=" + requests +
+                '}'+"\n";
     }
 }

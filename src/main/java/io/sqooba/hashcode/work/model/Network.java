@@ -3,6 +3,7 @@ package io.sqooba.hashcode.work.model;
 import io.sqooba.hashcode.common.Parsable;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.util.Arrays;
 import java.util.Collections;
@@ -17,7 +18,11 @@ public class Network implements Parsable<Network> {
     public int[] videoPopularity; //id is video id
 
     public Video[] videos;
+
+    File inFile;
+
     public Network(String filePath) {
+        inFile = new File(filePath);
         parse(filePath);
     }
 
@@ -90,5 +95,9 @@ public class Network implements Parsable<Network> {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public File getOutFile() {
+        return new File("src/main/resources/solutions", inFile.getName().replace(".in", "") + ".out");
     }
 }

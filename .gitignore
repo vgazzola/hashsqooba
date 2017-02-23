@@ -28,3 +28,4 @@ log/
 # Python virtualenv
 python/hashcode_venv
 Statement.pdf
+*.pdf

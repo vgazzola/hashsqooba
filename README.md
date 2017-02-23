@@ -21,3 +21,9 @@ Methodology
 * Agree on pseudo-code
 * Extreme-code
 * Drink beer
+
+## Requirements
+ 
+###Iteration nº1
+List of videos sorted by size in ascending order (10,20,300,...)
+Size of the cache servers

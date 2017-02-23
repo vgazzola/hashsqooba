@@ -7,6 +7,7 @@ public class Video implements Comparable<Video>{
     public int size;
     public int id;
     public int requests;
+    public int latency = 1;
 
     public Video(int size, int id) {
         this.size = size;
@@ -23,7 +24,7 @@ public class Video implements Comparable<Video>{
 //        return (double)size;
 //    }
     private double getValue(){
-        return (double)size / requests;
+        return  ((double)size / requests )* latency;
     }
 
     @Override

@@ -27,3 +27,5 @@ Methodology
 ###Iteration nº1
 List of videos sorted by size in ascending order (10,20,300,...)
 Size of the cache servers
+Hashmap key: video id, value: sum of requests for video (popularity)
+Hashmap key: video id, value: popularity/size

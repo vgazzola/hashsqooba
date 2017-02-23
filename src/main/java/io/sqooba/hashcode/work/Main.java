@@ -40,10 +40,11 @@ public class Main {
             }
             System.out.println("size tot = " + size);
 
-            System.out.println(n.numberOfcacheServers);
             BufferedWriter writer = null;
             try  {
                 writer = new BufferedWriter(new FileWriter(n.getOutFile()));
+                writer.write(n.numberOfcacheServers + "\n");
+
                 for (int i = 0; i < n.numberOfcacheServers; i++) {
                     writer.write(i + separator + videoIds + "\n");
                 }

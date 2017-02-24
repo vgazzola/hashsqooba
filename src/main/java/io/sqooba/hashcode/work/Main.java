@@ -5,10 +5,7 @@ import io.sqooba.hashcode.work.model.Network;
 import io.sqooba.hashcode.work.model.Video;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by VGazzola on 21/02/17.
@@ -21,12 +18,22 @@ public class Main {
 
         //ascending input size
         networkList.add(new Network("src/main/resources/problems/work/me_at_the_zoo.in"));
+        //500
         networkList.add(new Network("src/main/resources/problems/work/videos_worth_spreading.in"));
+        //500000
         networkList.add(new Network("src/main/resources/problems/work/trending_today.in"));
+        //50000
         networkList.add(new Network("src/main/resources/problems/work/kittens.in"));
 
         for (Network n: networkList) {
-//            System.out.println(n);
+            long totRequest = 0;
+            for (int i = 0; i < n.videos.length; i++) {
+                totRequest+= n.videos[i].requests;
+            }
+            double moyReq = (double) totRequest /n.videos.length;
+//            List<Video> videoList = new ArrayList<Video>(n.videos);
+//            Stream<Video> stream = Arrays.stream(n.videos);
+            System.out.println(n);
             System.out.println(n.inFile.toString());
             String[] videoIds = new String[n.numberOfcacheServers];
             int[] alreadySelected = new int[n.numberOfVideo];
@@ -55,9 +62,10 @@ public class Main {
 
                             size += currentVid.size;
 
-                           if(currentSelectedVids.contains(currentVid.id) || alreadySelected[currentVid.id] >3)
-                               continue;
-
+                            if(currentSelectedVids.contains(currentVid.id) || alreadySelected[currentVid.id] >3)
+                                continue;
+                            if(currentVid.requests < moyReq)
+                                continue;
                             videoIds[i] += currentVid.id + separator;
                             alreadySelected[currentVid.id]++;
                             currentSelectedVids.add(currentVid.id);
